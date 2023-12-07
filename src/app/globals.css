@@ -1,5 +1,8 @@
 body {
-  background-color: wheat;
+  background-color: wheat!important;
+}
+.list-cont {
+  width: 600px;
 }
 .text {
   margin-bottom: 50px;
