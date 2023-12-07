@@ -44,7 +44,7 @@ export const Form = () => {
         style={{
           display: "flex",
           flexDirection: "column",
-          width: "45%",
+          width: "35%",
           margin: "10px auto",
           marginTop: "150px",
           border: "none",
@@ -55,7 +55,7 @@ export const Form = () => {
             background: "#ede7f0",
             borderRadius: "10px",
             border: "1px solid #333",
-            width: "500px",
+            width: "550px",
             height: "200px",
             display: "flex",
             alignItems: "center",
