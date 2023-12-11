@@ -14,6 +14,16 @@ const MainPage = () => {
   const dispatch = useAppDispatch();
   const token = useAppSelector((state) => state.auth.user?.token);
   const [newPassword, setNewPassword] = useState("");
+  const [files, setfiles] = useState([])
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleFileChange = (event: any) => {
+    const file = event.target.files[0];
+    console.log("pis",file)
+    setSelectedFile(file);
+   // handleFileUpload();
+    
+  };
   const handleLogOut = async (e: any) => {
     e.preventDefault();
     dispatch(setUser(undefined));
@@ -34,6 +44,37 @@ const MainPage = () => {
       console.log(error);
     }
   };
+
+  const handleFileUpload = async () => {
+    console.log("piska", selectedFile)
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+      try {
+        // Replace 'your-upload-endpoint' with the actual endpoint where you want to send the file
+        const response = await axios.post('https://localhost:7104/Auth/LoadImage', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: "Bearer " + token,
+          },
+        });
+
+        if (response.status == 200) {
+          getuserFiles();
+        }
+       // setSelectedFile(null)
+        //alert (response.status)
+
+        console.log('File uploaded successfully:', response.data);
+        // Handle success, update state, etc.
+      } catch (error: any) {
+        console.error('Error uploading file:', error.message);
+        // Handle error
+      }
+    }
+  };
+
+
 
   const handleCheakNewPassword = async (e: any) => {
     e.preventDefault();
@@ -64,11 +105,31 @@ const MainPage = () => {
     }
   };
 
+  const getuserFiles = async () => {
+    try {
+      const response = await axios.get(
+        `https://localhost:7104/Auth/UserMe`,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      if (response.data.filePath) {
+        setfiles(response.data.filePath)
+      }
+      console.log(response);
+    } catch (error) {
+      console.log("🚀 ~ file: Form.tsx:34 ~ handleTestToken ~ error:", error);
+    }
+  };
+
   useEffect(() => {
     if (isAuth === true) {
       console.log(isAuth);
       checkToken();
     }
+    getuserFiles();
   }, [newPassword]);
 
   return (
@@ -152,6 +213,25 @@ const MainPage = () => {
             >
               Выйти
             </button>
+            <div>
+              <label htmlFor="formFileLg" onChange={handleFileChange} className="form-label">Добавьте файл</label>
+              <input onChange={handleFileChange} className="form-control form-control-lg" id="formFileLg"  type="file"/>
+              <button onClick={handleFileUpload}>
+                Загрузить
+              </button>
+            </div>
+            <div className="list-cont">
+                <ul style={{ display:"flex",flexWrap: "wrap" ,listStyle: "none"}}>
+                  {files.map((file, index) => (
+                    <li  key={index}> <img  src={file} alt="не прогрузилось"  style={{maxWidth:"50%", textDecoration: "none",maxHeight:"300px"}}/></li>
+                  ))}
+                </ul>
+              </div>
+
+            {/* <div>
+              <input type="file" onChange={handleFileChange} />
+              <button onClick={handleFileUpload}>Загрузить файл</button>
+            </div> */}
           </>
         )}
       </div>
