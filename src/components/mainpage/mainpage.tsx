@@ -93,7 +93,7 @@ const MainPage = () => {
               style={{
                 width: "100vw",
                 height: "100vh",
-                marginTop: "200px",
+                marginTop: "150px",
                 display: "flex",
                 justifyContent: "center",
               }}

@@ -42,7 +42,66 @@ export const Form = () => {
   };
   return (
     <>
-      <div
+     <div
+        className="register-authorization-container"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          width: "45%",
+          margin: "10px auto",
+          marginTop: "150px",
+          border: "none",
+        }}
+      >
+        <form>
+          {/* Email input */}
+          <div className="form-outline mb-4">
+            <input
+              value={login}
+              onChange={(e) => {
+                setLogin(e.target.value);
+              }}
+              type="email"
+              id="form2Example1"
+              className="form-control"
+            />
+            <label className="form-label text-gray-50" htmlFor="form2Example1">
+              Логин
+            </label>
+          </div>
+
+          {/* Password input */}
+          <div className="form-outline mb-4">
+            <input
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              type="text"
+              id="form2Example2"
+              className="form-control"
+            />
+            <label className="form-label" htmlFor="form2Example2">
+              Пароль
+            </label>
+          </div>
+
+          {/* Submit button */}
+          <button
+            onClick={(e) => {
+              handleLogin(e);
+            }}
+            type="button"
+            className="btn btn-primary btn-block mb-4"
+          >
+            Регистрация
+          </button>
+
+          {/* Register buttons */}
+        </form>
+      </div>
+
+      {/* <div
         style={{
           display: "flex",
           flexDirection: "column",
@@ -107,7 +166,7 @@ export const Form = () => {
             Войти
           </button>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

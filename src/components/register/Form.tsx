@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from "@/redux/store";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-
 export const Form = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -41,6 +40,7 @@ export const Form = () => {
   return (
     <>
       <div
+        className="register-authorization-container"
         style={{
           display: "flex",
           flexDirection: "column",
@@ -50,62 +50,55 @@ export const Form = () => {
           border: "none",
         }}
       >
-        <div
-          style={{
-            background: "#ede7f0",
-            borderRadius: "10px",
-            border: "1px solid #333",
-            width: "500px",
-            height: "200px",
-            display: "flex",
-            alignItems: "center",
-            flexDirection: "column",
-            justifyContent: "space-around",
-          }}
-        >
-          <input
-            type="text"
-            style={{
-              textIndent: "10px",
-              width: "30vw",
-              height: "4vh",
-              border: "none",
-              borderRadius: "5px",
-            }}
-            value={login}
-            onChange={(e) => {
-              setLogin(e.target.value);
-            }}
-          />
-          <input
-            type="text"
-            style={{
-              textIndent: "10px",
-              width: "30vw",
-              height: "4vh",
-              border: "none",
-              borderRadius: "5px",
-            }}
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
+        <form>
+          {/* Email input */}
+          <div className="form-outline mb-4">
+            <input
+              value={login}
+              onChange={(e) => {
+                setLogin(e.target.value);
+              }}
+              type="email"
+              id="form2Example1"
+              className="form-control"
+            />
+            <label className="form-label text-gray-50" htmlFor="form2Example1">
+              Логин
+            </label>
+          </div>
+
+          {/* Password input */}
+          <div className="form-outline mb-4">
+            <input
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              type="text"
+              id="form2Example2"
+              className="form-control"
+            />
+            <label className="form-label" htmlFor="form2Example2">
+              Пароль
+            </label>
+          </div>
+
+          {/* Submit button */}
           <button
-            className="btn"
-            style={{
-              width: "30.4vw",
-              height: "4vh",
-              fontSize: "20px",
-            }}
             onClick={(e) => {
               handleLogin(e);
             }}
+            type="button"
+            className="btn btn-primary btn-block mb-4"
           >
             Регистрация
           </button>
-        </div>
+
+          {/* Register buttons */}
+        </form>
       </div>
+
+      
     </>
   );
 };
