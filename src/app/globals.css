@@ -1,6 +1,14 @@
 body {
   background-color: rgb(209, 209, 209);
 }
+.btn-uniq {
+  width: 135px;
+  height: 40px;
+  transition: all 0.5s;
+}
+.btn-uniq:hover {
+  transform: scale(15.1);
+}
 .text {
   margin-bottom: 50px;
   text-decoration: none;

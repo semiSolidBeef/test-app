@@ -158,7 +158,7 @@ const MainPage = () => {
                 role="tablist"
               >
                 <li
-                  className="nav-item"
+                  className="nav-item btn-uniq"
                   style={{ marginRight: "50px" }}
                   role="presentation"
                 >
@@ -174,7 +174,7 @@ const MainPage = () => {
                     Авторизация
                   </Link>
                 </li>
-                <li className="nav-item" role="presentation">
+                <li className="nav-item btn-uniq" role="presentation">
                   <Link
                     className="btn nav-link"
                     id="tab-register"
@@ -188,34 +188,6 @@ const MainPage = () => {
                   </Link>
                 </li>
               </ul>
-              {/* <div
-                style={{
-                  background: "#ede7f0",
-                  borderRadius: "10px",
-                  border: "1px solid #333",
-                  width: "500px",
-                  height: "200px",
-                  display: "flex",
-                  alignItems: "center",
-                  flexDirection: "column",
-                  justifyContent: "space-around",
-                }}
-              >
-                <Link
-                  href={"brand_auth"}
-                  className="text"
-                  title="Авторизоваться"
-                >
-                  Авторизоваться
-                </Link>
-                <Link
-                  href={"register"}
-                  className="text"
-                  title="Зарегистрироваться"
-                >
-                  Зарегистрироваться
-                </Link>
-              </div> */}
             </div>
           </>
         ) : (
