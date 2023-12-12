@@ -157,10 +157,14 @@ const MainPage = () => {
                 id="ex1"
                 role="tablist"
               >
-                <li className="nav-item" role="presentation">
+                <li
+                  className="nav-item"
+                  style={{ marginRight: "50px" }}
+                  role="presentation"
+                >
                   <Link
                     href={"brand_auth"}
-                    className="nav-link active"
+                    className="btn nav-link"
                     id="tab-login"
                     data-mdb-toggle="pill"
                     role="tab"
@@ -172,7 +176,7 @@ const MainPage = () => {
                 </li>
                 <li className="nav-item" role="presentation">
                   <Link
-                    className="nav-link"
+                    className="btn nav-link"
                     id="tab-register"
                     data-mdb-toggle="pill"
                     role="tab"
