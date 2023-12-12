@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { setIsAuth, setUser } from "@/redux/reducers/authSlice";
 import axios from "axios";
-
+import Image from "next/image";
 const MainPage = () => {
   const router = useRouter();
   const isAuth = useAppSelector((state) => state.auth.isAuth);
@@ -261,7 +261,7 @@ const MainPage = () => {
                 {files.map((file, index) => (
                   <li key={index}>
                     {" "}
-                    <img
+                    <Image
                       src={file}
                       alt="не прогрузилось"
                       style={{
