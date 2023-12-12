@@ -33,8 +33,8 @@ export const Form = () => {
       router.push("/");
       dispatch(setIsAuth(true));
     } catch (error) {
-      console.log(error);
-      alert("Ошибка регистрации!");
+      console.log("пошел нахуй:",error);
+      alert("ПОшел нахъуй");
     }
   };
   return (

@@ -14,15 +14,14 @@ const MainPage = () => {
   const dispatch = useAppDispatch();
   const token = useAppSelector((state) => state.auth.user?.token);
   const [newPassword, setNewPassword] = useState("");
-  const [files, setfiles] = useState([])
+  const [files, setfiles] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (event: any) => {
     const file = event.target.files[0];
-    console.log("pis",file)
+    console.log("pis", file);
     setSelectedFile(file);
-   // handleFileUpload();
-    
+    // handleFileUpload();
   };
   const handleLogOut = async (e: any) => {
     e.preventDefault();
@@ -46,35 +45,37 @@ const MainPage = () => {
   };
 
   const handleFileUpload = async () => {
-    console.log("piska", selectedFile)
+    console.log("piska", selectedFile);
     if (selectedFile) {
       const formData = new FormData();
-      formData.append('file', selectedFile);
+      formData.append("file", selectedFile);
       try {
         // Replace 'your-upload-endpoint' with the actual endpoint where you want to send the file
-        const response = await axios.post('https://localhost:7104/Auth/LoadImage', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: "Bearer " + token,
-          },
-        });
+        const response = await axios.post(
+          "https://localhost:7104/Auth/LoadImage",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
 
         if (response.status == 200) {
           getuserFiles();
         }
-       // setSelectedFile(null)
+        // setSelectedFile(null)
         //alert (response.status)
 
-        console.log('File uploaded successfully:', response.data);
+        console.log("File uploaded successfully:", response.data);
         // Handle success, update state, etc.
       } catch (error: any) {
-        console.error('Error uploading file:', error.message);
+        console.error("Error uploading file:", error.message);
         // Handle error
       }
     }
   };
-
-
 
   const handleCheakNewPassword = async (e: any) => {
     e.preventDefault();
@@ -107,16 +108,13 @@ const MainPage = () => {
 
   const getuserFiles = async () => {
     try {
-      const response = await axios.get(
-        `https://localhost:7104/Auth/UserMe`,
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
+      const response = await axios.get(`https://localhost:7104/Auth/UserMe`, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
       if (response.data.filePath) {
-        setfiles(response.data.filePath)
+        setfiles(response.data.filePath);
       }
       console.log(response);
     } catch (error) {
@@ -143,11 +141,6 @@ const MainPage = () => {
           gap: "10px",
         }}
       >
-        <h1
-          style={{
-            userSelect: "none",
-          }}
-        ></h1>
         {isAuth === false ? (
           <>
             <div
@@ -159,7 +152,39 @@ const MainPage = () => {
                 justifyContent: "center",
               }}
             >
-              <div
+              <ul
+                className="nav nav-pills nav-justified mb-3"
+                id="ex1"
+                role="tablist"
+              >
+                <li className="nav-item" role="presentation">
+                  <Link
+                    href={"brand_auth"}
+                    className="nav-link active"
+                    id="tab-login"
+                    data-mdb-toggle="pill"
+                    role="tab"
+                    aria-controls="pills-login"
+                    aria-selected="true"
+                  >
+                    Авторизация
+                  </Link>
+                </li>
+                <li className="nav-item" role="presentation">
+                  <Link
+                    className="nav-link"
+                    id="tab-register"
+                    data-mdb-toggle="pill"
+                    role="tab"
+                    href={"register"}
+                    aria-controls="pills-register"
+                    aria-selected="false"
+                  >
+                    Регистрация
+                  </Link>
+                </li>
+              </ul>
+              {/* <div
                 style={{
                   background: "#ede7f0",
                   borderRadius: "10px",
@@ -186,7 +211,7 @@ const MainPage = () => {
                 >
                   Зарегистрироваться
                 </Link>
-              </div>
+              </div> */}
             </div>
           </>
         ) : (
@@ -214,19 +239,41 @@ const MainPage = () => {
               Выйти
             </button>
             <div>
-              <label htmlFor="formFileLg" onChange={handleFileChange} className="form-label">Добавьте файл</label>
-              <input onChange={handleFileChange} className="form-control form-control-lg" id="formFileLg"  type="file"/>
-              <button onClick={handleFileUpload}>
-                Загрузить
-              </button>
+              <label
+                htmlFor="formFileLg"
+                onChange={handleFileChange}
+                className="form-label"
+              >
+                Добавьте файл
+              </label>
+              <input
+                onChange={handleFileChange}
+                className="form-control form-control-lg"
+                id="formFileLg"
+                type="file"
+              />
+              <button onClick={handleFileUpload}>Загрузить</button>
             </div>
             <div className="list-cont">
-                <ul style={{ display:"flex",flexWrap: "wrap" ,listStyle: "none"}}>
-                  {files.map((file, index) => (
-                    <li  key={index}> <img  src={file} alt="не прогрузилось"  style={{maxWidth:"50%", textDecoration: "none",maxHeight:"300px"}}/></li>
-                  ))}
-                </ul>
-              </div>
+              <ul
+                style={{ display: "flex", flexWrap: "wrap", listStyle: "none" }}
+              >
+                {files.map((file, index) => (
+                  <li key={index}>
+                    {" "}
+                    <img
+                      src={file}
+                      alt="не прогрузилось"
+                      style={{
+                        maxWidth: "50%",
+                        textDecoration: "none",
+                        maxHeight: "300px",
+                      }}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
 
             {/* <div>
               <input type="file" onChange={handleFileChange} />
